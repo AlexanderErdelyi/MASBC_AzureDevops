@@ -4,6 +4,10 @@ page 50100 "Open AI Setup"
     ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = "OpenAI Setup";
+    Caption = 'OpenAI Setup';
+    SourceTable = "OpenAl Setup";
+    InsertAllowed = false;
+    DeleteAllowed = false;
 
     layout
     {
@@ -11,11 +15,26 @@ page 50100 "Open AI Setup"
         {
             group(GroupName)
             {
-                // field(Name; NameSource)
-                // {
-                //     ApplicationArea = All;
+                field("Organization ID"; Rec."Organization ID")
+                {
+                    //pplicationArea = All;
+                    Caption = 'Organization ID';
 
-                // }
+                }
+                field("API Key"; Rec."API Key")
+                {
+                    //pplicationArea = All;
+                    Caption = 'API Key';
+                    ExtendedDatatype = Masked;
+
+                }
+
+                field("Default Max Token"; Rec."Default Max Token")
+                {
+                    //pplicationArea = All;
+                    Caption = 'Default Max Token';
+                }
+
             }
         }
     }
