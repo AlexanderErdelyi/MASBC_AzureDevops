@@ -16,7 +16,7 @@ codeunit 50100 "OpenAI-Management"
         Request.GetHeaders(Headers);
         Headers.Add('OpenAIOrganization', GlobalOrganizationID);
         AuthorizationValue := GetAuthorization(GlobalAPIKey);
-        Headers.Add('Authorization, AuthorizationValue')
+        Headers.Add('Authorization, AuthorizationValue');
     end;
 
 }
