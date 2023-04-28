@@ -24,6 +24,11 @@ table 50111 "OpenAI Setup"
             DataClassification = ToBeClassified;
         }
 
+        field(30; "Default Temperature"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+
     }
 
     keys
