@@ -67,7 +67,6 @@ procedure SendDefaultRequest(Request: Text; var Response: Text)
         if GetResponse() then
             Response := GetResponseTextResponseValue()
     end;
-   
 
     local procedure ReadResponse(var Response: Text): Text
     var
@@ -92,6 +91,21 @@ procedure SendDefaultRequest(Request: Text; var Response: Text)
     procedure GetDefaultModel(): Text
     begin
         exit('text-devinci-003')
+    end;
+
+
+local procedure SetHeaders(var Content: HttpContent; var Request: HttpRequestMessage)
+    var
+        Headers: HttpHeaders;
+        AuthorizationValue: Text;
+    begin
+        Content.GetHeaders(Headers);
+        Headers.Clear();
+        Headers.Add('ContentType', 'application/json');
+        Request.GetHeaders(Headers);
+        Headers.Add('OpenAIOrganization', GlobalOrganizationID);
+        AuthorizationValue := GetAuthorization(GlobalAPIKey);
+        Headers.Add('Authorization, AuthorizationValue');
     end;
 
 
