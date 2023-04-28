@@ -34,6 +34,12 @@ page 50100 "Open AI Setup"
                     Caption = 'Default Max Token';
                 }
 
+                field("Default Temperature"; Rec."Default Temperature")
+                {
+                    //pplicationArea = All;
+                    Caption = 'Default Temperature';
+                }
+
             }
         }
     }
@@ -60,10 +66,12 @@ page 50100 "Open AI Setup"
         }
     }
     trigger OnOpenPage()
-    var
-        OpenAIMgt: Codeunit "Open AI Management";
     begin
-        OpenAISetup.get();
+        Rec.Reset;
+        if not Rec.GET() THEN begin
+            Rec.Init();
+            Rec.Insert();
+        end;
     end;
 
     var
