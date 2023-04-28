@@ -1,22 +1,32 @@
-page Id MyPage
+page 50112 "Ask GPT"
 {
     PageType = Card;
     ApplicationArea = All;
-    Caption = 'AskGPT';
+    Caption = 'Ask GPT';
     UsageCategory = Tasks;
     InsertAllowed = false;
-    DeleteAllowed = false
-    SourceTable = Name;
+    DeleteAllowed = false;
 
     layout
     {
         area(Content)
         {
-            group(requestGroup)
+            group(RequestGroup)
             {
                 ShowCaption = true;
                 Caption = 'Request';
                 field(Request; Request)
+                {
+                    ShowCaption = false;
+                    ApplicationArea = All;
+                    MultiLine = true;
+                }
+            }
+            group(ResponseGroup)
+            {
+                ShowCaption = true;
+                Caption = 'Response';
+                field(Response; Response)
                 {
                     ShowCaption = false;
                     ApplicationArea = All;
