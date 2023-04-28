@@ -1,9 +1,9 @@
-page Id MyPage
+page 50100 "Open AI Setup"
 {
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = Administration;
-    SourceTable = TableName;
+    SourceTable = "OpenAI Setup";
 
     layout
     {
@@ -11,14 +11,16 @@ page Id MyPage
         {
             group(GroupName)
             {
-                field(Name; NameSource)
-                {
-                    ApplicationArea = All;
+                // field(Name; NameSource)
+                // {
+                //     ApplicationArea = All;
 
-                }
+                // }
             }
         }
     }
+
+
 
     actions
     {
@@ -27,15 +29,27 @@ page Id MyPage
             action(ActionName)
             {
                 ApplicationArea = All;
+                Caption = 'Senden';
 
                 trigger OnAction()
+                var
+                    OpenAIMgt: Codeunit "Open AI Management";
                 begin
-
+                    Clear(OpenAIMgt);
+                    //OpenAIMgt.SendDefaultRequest(Request, Response);
                 end;
             }
         }
     }
+    trigger OnOpenPage()
+    var
+        OpenAIMgt: Codeunit "Open AI Management";
+    begin
+        OpenAISetup.get();
+    end;
 
     var
-        myInt: Integer;
+        Request: Text[250];
+        Response: Text;
+        OpenAISetup: Record "OpenAI Setup";
 }
