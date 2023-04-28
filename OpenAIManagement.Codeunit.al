@@ -4,7 +4,7 @@ codeunit 50111 "OpenAI Management"
     var
         myInt: Integer;
         GlobalTextResponseValue: Text;
-    
+
     begin
 
     end;
@@ -54,9 +54,9 @@ codeunit 50111 "OpenAI Management"
         GlobalPrompt := Prompt;
     end;
 
-procedure SendDefaultRequest(Request: Text; var Response: Text)
+    procedure SendDefaultRequest(Request: Text; var Response: Text)
     var
-        OpenISetup: Record "OpenAI Setup";        
+        OpenISetup: Record "OpenAI Setup";
     begin
         OpenAISetup.Get();
         SetOrganizationId(OpenAISetup."Organization ID");
@@ -93,6 +93,18 @@ procedure SendDefaultRequest(Request: Text; var Response: Text)
         exit('text-devinci-003')
     end;
 
+    local procedure SetBody(var Content: HttpContent)
+    var
+        bodyJson: JsonObject;
+        JsonData: Text;
+    begin
+        bodyJson.Add('model', GetDefaultModel());
+        bodyJson.Add('prompt', GlobalPrompt);
+        bodyJson.Add('max_tokens', GlobalMaxToken);
+        bodyJson.Add('temperature', GlobalTemperature);
+        bodyJson.WriteTo(JsonData);
+        Content.WriteFrom(JsonData);
+    end;
 
 local procedure SetHeaders(var Content: HttpContent; var Request: HttpRequestMessage)
     var
@@ -107,7 +119,6 @@ local procedure SetHeaders(var Content: HttpContent; var Request: HttpRequestMes
         AuthorizationValue := GetAuthorization(GlobalAPIKey);
         Headers.Add('Authorization, AuthorizationValue');
     end;
-
 
     var
         GlobalOrganizationId: Text[50];
