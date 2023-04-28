@@ -14,7 +14,7 @@ table 50111 "OpenAI Setup"
             DataClassification = ToBeClassified;
         }
 
-        field(10; "API Key"; Decimal)
+        field(10; "API Key"; Text[100])
         {
             DataClassification = ToBeClassified;
         }

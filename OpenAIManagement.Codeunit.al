@@ -24,7 +24,7 @@ codeunit 50111 "OpenAI Management"
         exit('httos://api.openai.com/v1/completion')
     end;
 
-    procedure SetOrganzationID(organizationID: Text[50])
+    procedure SetOrganizationId(organizationID: Text[50])
     begin
         GlobalOrganizationId := organizationID
     end;
@@ -56,13 +56,13 @@ codeunit 50111 "OpenAI Management"
 
     procedure SendDefaultRequest(Request: Text; var Response: Text)
     var
-        OpenISetup: Record "OpenAI Setup";
+        OpenAISetup: Record "OpenAI Setup";
     begin
         OpenAISetup.Get();
         SetOrganizationId(OpenAISetup."Organization ID");
         SetAPIKey(OpenAISetup."API Key");
         SetMaxToken(OpenAISetup."Default Max Token");
-        SetTemperature(OpenAISetup."Default Temerature");
+        SetTemperature(OpenAISetup."Default Temperature");
         SetPrompt(Request);
         if GetResponse() then
             Response := GetResponseTextResponseValue()
@@ -106,7 +106,7 @@ codeunit 50111 "OpenAI Management"
         Content.WriteFrom(JsonData);
     end;
 
-local procedure SetHeaders(var Content: HttpContent; var Request: HttpRequestMessage)
+    local procedure SetHeaders(var Content: HttpContent; var Request: HttpRequestMessage)
     var
         Headers: HttpHeaders;
         AuthorizationValue: Text;
@@ -117,7 +117,7 @@ local procedure SetHeaders(var Content: HttpContent; var Request: HttpRequestMes
         Request.GetHeaders(Headers);
         Headers.Add('OpenAIOrganization', GlobalOrganizationID);
         AuthorizationValue := GetAuthorization(GlobalAPIKey);
-        Headers.Add('Authorization, AuthorizationValue');
+        Headers.Add('Authorization', AuthorizationValue);
     end;
 
     var
