@@ -1,8 +1,8 @@
-codeunit Id MyCodeunit
+codeunit 50111 "OpenAI Management"
 {
     trigger OnRun()
     procedure SendDefaultRequest(Request: Text; var Response: Text)
-    var 
+    var
         OpenISetup: Record "OpenAI Setup";
     begin
         OpenAISetup.Get();
@@ -14,7 +14,7 @@ codeunit Id MyCodeunit
         if GetResponse() then
             Response := GetResponseTextResponseValue()
     end;
-    
+
     //var
-        //myInt: Integer;
+    //myInt: Integer;
 }
