@@ -5,7 +5,6 @@ page 50100 "Open AI Setup"
     UsageCategory = Administration;
     SourceTable = "OpenAI Setup";
     Caption = 'OpenAI Setup';
-    SourceTable = "OpenAl Setup";
     InsertAllowed = false;
     DeleteAllowed = false;
 
